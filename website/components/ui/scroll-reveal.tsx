@@ -5,7 +5,9 @@ import { useRef } from "react";
 
 type Animation = "fadeUp" | "fadeDown" | "fadeLeft" | "fadeRight" | "scale" | "fadeIn";
 
-const VARIANTS: Record<Animation, Variants> = {
+type AnimDef = { hidden: Variants[string]; visible: Variants[string] };
+
+const VARIANTS: Record<Animation, AnimDef> = {
   fadeUp:    { hidden: { opacity: 0, y: 48 },    visible: { opacity: 1, y: 0 } },
   fadeDown:  { hidden: { opacity: 0, y: -48 },   visible: { opacity: 1, y: 0 } },
   fadeLeft:  { hidden: { opacity: 0, x: -56 },   visible: { opacity: 1, x: 0 } },
@@ -39,7 +41,7 @@ export function ScrollReveal({
       ref={ref}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
-      variants={VARIANTS[animation]}
+      variants={VARIANTS[animation] as Variants}
       transition={{ duration, delay, ease: [0.4, 0, 0.2, 1] }}
       className={className}
     >
@@ -97,11 +99,11 @@ export function StaggerItem({
   return (
     <motion.div
       variants={{
-        hidden: VARIANTS[animation].hidden as object,
+        hidden: VARIANTS[animation].hidden,
         visible: {
           ...(VARIANTS[animation].visible as object),
           transition: { duration: 0.55, ease: [0.4, 0, 0.2, 1] },
-        },
+        } as Variants[string],
       }}
       className={className}
     >
