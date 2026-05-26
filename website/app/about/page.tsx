@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import SectionHead from "@/components/ui/SectionHead";
 import { ScrollReveal, ScrollStagger, StaggerItem } from "@/components/ui/scroll-reveal";
@@ -29,12 +30,14 @@ export default function AboutPage() {
         </ScrollReveal>
 
         <ScrollReveal animation="fadeRight" delay={0.15} duration={0.7}>
-          <div
-            className="glass-card w-full aspect-video overflow-hidden relative flex items-center justify-center rounded-xl"
-          >
-            <span className="text-sm" style={{ color: "var(--muted)" }}>
-              Photo coming soon
-            </span>
+          <div className="w-full aspect-video overflow-hidden relative rounded-xl">
+            <Image
+              src="/images/portfolio/dji-aerial-hq.jpg"
+              alt="Aerial drone shot"
+              fill
+              quality={90}
+              style={{ objectFit: "cover", objectPosition: "center" }}
+            />
           </div>
         </ScrollReveal>
       </div>
