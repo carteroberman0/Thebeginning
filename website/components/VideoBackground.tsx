@@ -3,11 +3,11 @@
 import { useState, useRef } from "react";
 
 const VIDEOS = [
-  "/videos/church-shot.mov",
+  "/videos/church-shot.mp4",
   "/videos/cayuga-pan.mp4",
   "/videos/cayuga-zoom.mp4",
   "/videos/cayuga-close.mp4",
-  "/videos/church-shot-2.mov",
+  "/videos/church-shot-2.mp4",
 ];
 
 export default function VideoBackground() {
