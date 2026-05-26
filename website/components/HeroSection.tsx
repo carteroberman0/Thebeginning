@@ -3,14 +3,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import VideoBackground from "./VideoBackground";
 import { EtheralShadow } from "./ui/etheral-shadow";
 
 export default function HeroSection() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Full-screen video */}
-      <VideoBackground />
+      {/* Full-screen background image */}
+      <Image
+        src="/images/portfolio/14-cayuga-aerial-hq.jpg"
+        alt="Aerial drone photography"
+        fill
+        priority
+        quality={90}
+        style={{ objectFit: "cover", objectPosition: "center" }}
+      />
 
       {/* Gradient overlay */}
       <div

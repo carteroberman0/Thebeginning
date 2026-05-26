@@ -7,5 +7,5 @@ ui-ux-pro-max-skill/
 # macOS
 .DS_Store
 
-# data store (agent memory)
-data/
+# data store (agent memory) — root level only
+/data/
