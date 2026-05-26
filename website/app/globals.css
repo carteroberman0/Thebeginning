@@ -1,0 +1,517 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #ffffff;
+  --surface: #f4f9f4;
+  --surface-2: #e8f2e8;
+  --brand: #2d6119;
+  --brand-light: #4a8c29;
+  --brand-dim: rgba(45, 97, 25, 0.1);
+  --text: #0d160b;
+  --muted: #5a7054;
+  --border: rgba(45, 97, 25, 0.14);
+
+  /* Elevation shadows — green-tinted depth */
+  --shadow-sm:  0 1px 3px rgba(45,97,25,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 16px rgba(45,97,25,0.08), 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg:  0 8px 32px rgba(45,97,25,0.10), 0 4px 12px rgba(0,0,0,0.06);
+  --shadow-xl:  0 16px 48px rgba(45,97,25,0.12), 0 6px 18px rgba(0,0,0,0.07);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-brand: var(--brand);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border-subtle: var(--border);
+  --font-cinzel: var(--font-cinzel);
+}
+
+html {
+  /* Warm near-white so path gaps read as light green tint */
+  background: #f7fbf7;
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
+  /* Transparent so fixed path background shows through gaps between sections */
+  background: transparent;
+  color: var(--text);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-cinzel), Georgia, serif;
+}
+
+/* ── Advanced Glassmorphism ── */
+
+/*
+ * Light glass — content cards on the light-background pages.
+ * Gradient border via mask: top-left corner is bright white, fades to
+ * brand-green tint at bottom-right — simulates light hitting glass edge.
+ */
+.glass-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(22px) saturate(180%);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.07),
+    0 2px 8px  rgba(45, 97, 25, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(45, 97, 25, 0.06);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+/* Gradient border — 1 px paint on top of the background via mask */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 255, 255, 0.18) 45%,
+    rgba(45, 97, 25, 0.14) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.glass-card:hover {
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.10),
+    0 4px 14px rgba(45, 97, 25, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(45, 97, 25, 0.08);
+  transform: translateY(-2px);
+}
+
+/*
+ * Dark glass — hero card and dark-section panels.
+ * Gradient border goes from bright-white spec at top-left to
+ * brand-green accent at bottom-right.
+ */
+.glass-dark {
+  position: relative;
+  background: rgba(4, 14, 4, 0.50);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.55),
+    0  8px 24px rgba(0, 0, 0, 0.30),
+    inset 0  1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.glass-dark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.05) 35%,
+    rgba(68, 190, 38, 0.18)  100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+/* Specular highlight — thin bright line across the top of dark cards */
+.glass-dark::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/*
+ * Nav glass — applied when navbar is scrolled.
+ */
+.glass-nav {
+  background: rgba(247, 251, 247, 0.80);
+  backdrop-filter: blur(22px) saturate(200%) brightness(1.02);
+  -webkit-backdrop-filter: blur(22px) saturate(200%) brightness(1.02);
+  box-shadow:
+    0 1px 0   rgba(45, 97, 25, 0.10),
+    0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Glass Buttons ── */
+
+/*
+ * Base — shared geometry, typography, transition.
+ * Pair with a variant modifier below.
+ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;          /* pill */
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  /* Gradient-border via mask — 1 px paint on every btn */
+}
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+}
+/* mask that turns ::before into a 1 px gradient ring */
+.btn::before {
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+                linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+/* Specular shimmer across the top edge */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+}
+.btn:hover  { opacity: 0.9; transform: translateY(-1px); }
+.btn:active { opacity: 1;   transform: translateY(0); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+/* ── Green variant — primary CTA ── */
+.btn-green {
+  background: linear-gradient(
+    145deg,
+    rgba(60, 140, 28, 0.92) 0%,
+    rgba(35, 90, 14, 0.96) 100%
+  );
+  color: #ffffff;
+  box-shadow:
+    0 4px 20px rgba(45, 97, 25, 0.45),
+    0 1px 4px  rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(140, 220, 80, 0.25);
+}
+.btn-green::before {
+  background: linear-gradient(
+    145deg,
+    rgba(140, 220, 80, 0.55) 0%,
+    rgba(45, 97, 25, 0.20) 50%,
+    rgba(20, 60, 8, 0.10)  100%
+  );
+}
+.btn-green:hover {
+  box-shadow:
+    0 6px 28px rgba(45, 97, 25, 0.60),
+    0 2px 6px  rgba(0, 0, 0, 0.30),
+    inset 0 1px 0 rgba(140, 220, 80, 0.30);
+}
+
+/* ── Glass-white variant — secondary / outline ── */
+.btn-white {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+.btn-white::before {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+}
+.btn-white:hover {
+  background: rgba(255, 255, 255, 0.20);
+  box-shadow:
+    0 6px 22px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+/* ── Glass-dark variant — on light pages ── */
+.btn-glass {
+  background: rgba(255, 255, 255, 0.70);
+  color: var(--brand);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    0 1px 3px  rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+.btn-glass::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.80) 0%,
+    rgba(255, 255, 255, 0.20) 50%,
+    rgba(45, 97, 25, 0.12)   100%
+  );
+}
+.btn-glass:hover {
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow:
+    0 6px 24px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.98);
+}
+
+/* Legacy aliases kept for any existing usages */
+.glass-white   { background: rgba(255,255,255,0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: var(--shadow-lg); }
+.glass-surface { background: rgba(244,249,244,0.90); backdrop-filter: blur(10px);  -webkit-backdrop-filter: blur(10px);  box-shadow: var(--shadow-md); }
+.section-float { background: var(--bg); box-shadow: var(--shadow-xl); }
+
+/* Card elevation — now just adds hover lift; glass-card handles bg/shadow */
+.card-elevated {
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-elevated:hover {
+  box-shadow: var(--shadow-xl);
+  transform: translateY(-2px);
+}
+
+@keyframes videoFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideshowFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Portfolio 3D Hallway ─────────────────────────────────────────── */
+
+@keyframes ps-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-870px * 9)); }  /* 9 unique images × 870px */
+}
+@keyframes ps-zoom-bg {
+  from { transform: scale(1); }
+  to   { transform: scale(1.08); }
+}
+
+/* Fills the hero absolutely */
+.ps-hero {
+  position: absolute;
+  inset: 0;
+  background: #010602;
+  overflow: hidden;
+}
+
+/* Centers the 1000×562 canvas so scaling works correctly */
+.ps-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ps-content {
+  width: 1000px;
+  height: 562px;
+  flex-shrink: 0;
+  transform-origin: center center;
+  position: relative;
+}
+
+.ps-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* Blurred darkened background */
+.ps-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.18) saturate(0.4) blur(6px);
+  transform-origin: center;
+  animation: ps-zoom-bg 20s ease-in-out alternate infinite;
+}
+
+/* Subtle green radial glow from below */
+.ps-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 90% 50% at 50% 100%, rgba(45,97,25,0.4) 0%, transparent 60%);
+}
+
+/* Vignette to darken corners and blend into glass card */
+.ps-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 100% 100% at 50% 50%, transparent 30%, rgba(0,0,0,0.7) 100%);
+}
+
+/* ── Perspective room ── */
+
+/* Perspective container — centered in scene */
+.ps-room {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-435px, -200px);   /* half of 870×400 */
+  perspective: 600px;
+  perspective-origin: 50% 52%;
+}
+
+/* The 3D room box — viewer sits at the front opening (z = 0) */
+.ps-room-inner {
+  width: 870px;
+  height: 400px;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(-5deg);
+}
+
+/* Shared wall resets */
+.ps-wall {
+  position: absolute;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Back wall: 870×400 pushed 870px into screen */
+.ps-wall-back {
+  width: 870px;
+  height: 400px;
+  top: 0; left: 0;
+  transform: translateZ(-870px);
+}
+
+/* Left wall: pivots at left edge, swings into screen */
+.ps-wall-left {
+  width: 870px;   /* this becomes the depth (z-extent) */
+  height: 400px;
+  top: 0; left: 0;
+  transform-origin: 0 50%;
+  transform: rotateY(90deg);
+}
+
+/* Right wall: pivots at right edge (left: 870px), swings into screen */
+.ps-wall-right {
+  width: 870px;
+  height: 400px;
+  top: 0;
+  left: 870px;    /* align to right edge of the room opening */
+  transform-origin: 0 50%;
+  transform: rotateY(-90deg);
+}
+
+/* Floor: pivots at bottom edge */
+.ps-floor {
+  width: 870px;
+  height: 870px;   /* depth */
+  position: absolute;
+  bottom: 0; left: 0;
+  transform-origin: 50% 100%;
+  transform: rotateX(90deg);
+  background: linear-gradient(to bottom,
+    rgba(10,20,8,0.9) 0%,
+    rgba(3,10,3,1) 60%,
+    rgba(45,97,25,0.15) 100%
+  );
+}
+
+/* Ceiling: pivots at top edge */
+.ps-ceiling {
+  width: 870px;
+  height: 870px;
+  position: absolute;
+  top: 0; left: 0;
+  transform-origin: 50% 0%;
+  transform: rotateX(-90deg);
+  background: rgba(2,8,2,0.95);
+}
+
+/* ── Scrolling image strips ── */
+
+/* Strip wrapper — this is what animates */
+.ps-strip {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  height: 400px;
+  will-change: transform;
+}
+
+/* Each image in the strip */
+.ps-img {
+  width: 870px;
+  height: 400px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Three walls scroll at the same speed but different starting offsets */
+.ps-anim-back  { animation: ps-scroll 50s linear infinite; }
+.ps-anim-left  { animation: ps-scroll 50s linear infinite; animation-delay: -11.1s; }  /* offset ~1 image */
+.ps-anim-right { animation: ps-scroll 50s linear infinite; animation-delay: -22.2s; } /* offset ~2 images */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
