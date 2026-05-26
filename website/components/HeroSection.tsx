@@ -3,12 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import VideoBackground from "./VideoBackground";
 import { EtheralShadow } from "./ui/etheral-shadow";
 
 export default function HeroSection() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Full-screen background image */}
+      {/* Static image fallback — shows when videos aren't available */}
       <Image
         src="/images/portfolio/14-cayuga-aerial-hq.jpg"
         alt="Aerial drone photography"
@@ -17,6 +18,8 @@ export default function HeroSection() {
         quality={90}
         style={{ objectFit: "cover", objectPosition: "center" }}
       />
+      {/* Videos play on top when available (local dev) */}
+      <VideoBackground />
 
       {/* Gradient overlay */}
       <div
