@@ -12,7 +12,7 @@ export const serviceTiers: ServiceTier[] = [
   {
     id: "essential",
     name: "Essential",
-    price: "From $199",
+    price: "From $129",
     tagline: "Perfect for single-property listings",
     features: [
       "Up to 1 hour flight time",
@@ -26,7 +26,7 @@ export const serviceTiers: ServiceTier[] = [
   {
     id: "professional",
     name: "Professional",
-    price: "From $399",
+    price: "From $229",
     tagline: "Full coverage for real estate & events",
     features: [
       "Up to 3 hours flight time",
