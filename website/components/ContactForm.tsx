@@ -64,7 +64,7 @@ export default function ContactForm() {
         <select
           name="projectType"
           required
-          className="px-4 py-3 text-sm outline-none"
+          className="px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d6119]"
           style={fieldStyle}
         >
           <option value="">Select a type…</option>
@@ -81,7 +81,7 @@ export default function ContactForm() {
           required
           rows={5}
           placeholder="Tell us about your project, location, and timeline…"
-          className="px-4 py-3 text-sm outline-none resize-none"
+          className="px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d6119] resize-none"
           style={fieldStyle}
         />
       </div>
@@ -113,7 +113,7 @@ function Field({ name, label, type, required }: { name: string; label: string; t
         name={name}
         type={type}
         required={required}
-        className="px-4 py-3 text-sm outline-none"
+        className="px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d6119]"
         style={{
           background: "var(--surface-2)",
           color: "var(--text)",
