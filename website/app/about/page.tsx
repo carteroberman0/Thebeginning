@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SectionHead from "@/components/ui/SectionHead";
 import { ScrollReveal, ScrollStagger, StaggerItem } from "@/components/ui/scroll-reveal";
-import { bio, equipment, certifications } from "@/data/about";
+import { bio, equipment } from "@/data/about";
 
 export const metadata: Metadata = {
   title: "About | Captured Aerial",
@@ -70,36 +70,6 @@ export default function AboutPage() {
         </ScrollStagger>
       </div>
 
-      {/* Certifications */}
-      <div className="mt-24">
-        <ScrollReveal animation="fadeUp">
-          <SectionHead eyebrow="Credentials" title="Licensed & Insured" />
-        </ScrollReveal>
-        <ScrollStagger
-          className="flex flex-col gap-4 mt-10"
-          staggerDelay={0.14}
-          delayStart={0.05}
-        >
-          {certifications.map((cert) => (
-            <StaggerItem key={cert.name} animation="fadeLeft">
-              <div className="glass-card flex items-center gap-5 p-6 rounded-xl">
-                <span className="inline-block w-2.5 h-2.5 rounded-full shrink-0" style={{ background: "var(--brand)" }} />
-                <div>
-                  <p
-                    className="text-[13px] font-extrabold uppercase tracking-[0.05em]"
-                    style={{ color: "var(--text)" }}
-                  >
-                    {cert.name}
-                  </p>
-                  <p className="text-sm mt-0.5" style={{ color: "var(--muted)" }}>
-                    {cert.issuer} · {cert.year}
-                  </p>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </ScrollStagger>
-      </div>
     </div>
   );
 }
