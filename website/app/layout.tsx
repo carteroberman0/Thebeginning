@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   title: "Captured Aerial | Real Estate Media",
   description:
     "FAA Part 107 certified drone photography and videography for real estate, commercial, and cinematic projects. New Jersey.",
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
