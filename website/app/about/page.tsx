@@ -36,6 +36,7 @@ export default function AboutPage() {
               alt="Aerial drone shot"
               fill
               quality={90}
+              sizes="(max-width: 1024px) 100vw, 50vw"
               style={{ objectFit: "cover", objectPosition: "center" }}
             />
           </div>

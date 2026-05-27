@@ -41,15 +41,15 @@ export default function Home() {
         >
           <div className="h-full w-full grid grid-cols-3 grid-rows-2 gap-2 p-1">
             <div className="relative col-span-2 row-span-2 rounded-xl overflow-hidden">
-              <Image src="/images/portfolio/14-cayuga-front.jpg" alt="14 Cayuga Way front" fill className="object-cover" sizes="60vw" />
+              <Image src="/images/portfolio/14-cayuga-front-hq.jpg" alt="14 Cayuga Way front" fill className="object-cover" sizes="(max-width:768px) 100vw, 60vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               <span className="absolute bottom-3 left-3 text-xs text-white/80 font-bold tracking-widest uppercase">14 Cayuga Way</span>
             </div>
             <div className="relative rounded-xl overflow-hidden">
-              <Image src="/images/portfolio/14-cayuga-aerial.jpg" alt="14 Cayuga Way aerial" fill className="object-cover" sizes="20vw" />
+              <Image src="/images/portfolio/14-cayuga-aerial-hq.jpg" alt="14 Cayuga Way aerial" fill className="object-cover" sizes="(max-width:768px) 50vw, 20vw" />
             </div>
             <div className="relative rounded-xl overflow-hidden">
-              <Image src="/images/portfolio/14-cayuga-back.jpg" alt="14 Cayuga Way back" fill className="object-cover" sizes="20vw" />
+              <Image src="/images/portfolio/14-cayuga-back-hq.jpg" alt="14 Cayuga Way back" fill className="object-cover" sizes="(max-width:768px) 50vw, 20vw" />
             </div>
           </div>
         </ContainerScroll>
