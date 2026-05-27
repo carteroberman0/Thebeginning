@@ -17,6 +17,7 @@ export const serviceTiers: ServiceTier[] = [
     features: [
       "Up to 1 hour flight time",
       "20 edited aerial photos",
+      "2–3 edited 4K videos",
       "Online gallery delivery",
       "48-hour turnaround",
     ],
