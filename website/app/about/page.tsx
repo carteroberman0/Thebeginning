@@ -46,16 +46,19 @@ export default function AboutPage() {
       {/* Equipment */}
       <div className="mt-24">
         <ScrollReveal animation="fadeUp">
-          <SectionHead eyebrow="Gear" title="What We Fly With" />
+          <SectionHead title="What We Fly With" />
         </ScrollReveal>
         <ScrollStagger
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10"
-          staggerDelay={0.12}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 mt-6"
+          staggerDelay={0.08}
           delayStart={0.05}
         >
           {equipment.map((item) => (
-            <StaggerItem key={item.name} animation="scale">
-              <div className="glass-card p-6 h-full rounded-xl">
+            <StaggerItem key={item.name} animation="fadeUp">
+              <div
+                className="py-5 border-t"
+                style={{ borderColor: "var(--border)" }}
+              >
                 <h3
                   className="text-[13px] font-extrabold uppercase tracking-[0.05em] mb-1.5"
                   style={{ color: "var(--text)" }}

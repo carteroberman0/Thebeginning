@@ -424,7 +424,7 @@ h1, h2, h3 {
 .ps-wall {
   position: absolute;
   overflow: hidden;
-  background: #000;
+  background: oklch(7% 0.015 145);
 }
 
 /* Back wall: 870×400 pushed 870px into screen */

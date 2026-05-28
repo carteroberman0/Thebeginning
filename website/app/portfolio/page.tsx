@@ -113,7 +113,7 @@ export default function PortfolioPage() {
       <SectionHead
         eyebrow="Our Work"
         title="Portfolio"
-        lede="Real estate listings and cinematic flyovers — fully edited and delivered with precision."
+        lede="Aerial photography and video across New Jersey — shot with a DJI Mini 3, delivered within 48 hours."
       />
 
       <div className="mt-12 -mx-6">
@@ -125,7 +125,7 @@ export default function PortfolioPage() {
       </div>
 
       <div className="mt-20">
-        <SectionHead eyebrow="Video" title="Cinematic Reels" />
+        <SectionHead title="Cinematic Reels" />
         <VideoSection />
       </div>
     </div>

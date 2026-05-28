@@ -38,7 +38,7 @@ export default function ServicesPage() {
           <SectionHead
             eyebrow="Pricing"
             title="Simple, Transparent Rates"
-            lede="Every shoot includes a FAA Part 107 certified pilot, professional editing, and a fast turnaround."
+            lede="FAA Part 107 certified. Edited within 48 hours. Serving New Jersey and surrounding areas."
             center
           />
         </ScrollReveal>
@@ -57,18 +57,21 @@ export default function ServicesPage() {
 
         <div className="mt-24">
           <ScrollReveal animation="fadeLeft">
-            <SectionHead eyebrow="FAQ" title="Common Questions" />
+            <SectionHead title="Common Questions" />
           </ScrollReveal>
           <ScrollStagger
-            className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6"
-            staggerDelay={0.1}
-            delayStart={0.1}
+            className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-x-12"
+            staggerDelay={0.08}
+            delayStart={0.05}
           >
-            {faqs.map((faq, i) => (
-              <StaggerItem key={faq.q} animation={i % 2 === 0 ? "fadeLeft" : "fadeRight"}>
-                <div className="glass-card p-7 rounded-xl h-full">
+            {faqs.map((faq) => (
+              <StaggerItem key={faq.q} animation="fadeUp">
+                <div
+                  className="py-6 border-t"
+                  style={{ borderColor: "var(--border)" }}
+                >
                   <h3
-                    className="font-bold mb-2 uppercase text-sm tracking-wide"
+                    className="font-bold mb-2 text-sm tracking-wide"
                     style={{ color: "var(--text)" }}
                   >
                     {faq.q}
