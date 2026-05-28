@@ -33,22 +33,31 @@ export default function Home() {
           </ScrollReveal>
 
           <ScrollReveal animation="fadeUp" delay={0.15}>
-            <div
-              className="rounded-[30px] border-4 border-[#6C6C6C] p-3 md:p-6 shadow-2xl"
-              style={{ background: "#222222" }}
-            >
-              <div className="rounded-2xl overflow-hidden bg-zinc-900" style={{ height: "clamp(280px, 40vw, 560px)" }}>
-                <div className="h-full w-full grid grid-cols-3 grid-rows-2 gap-2 p-1">
-                  <div className="relative col-span-2 row-span-2 rounded-xl overflow-hidden">
-                    <Image src="/images/portfolio/14-cayuga-front-hq.jpg" alt="14 Cayuga Way front" fill className="object-cover" sizes="(max-width:768px) 100vw, 60vw" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                    <span className="absolute bottom-3 left-3 text-xs text-white/80 font-bold tracking-widest uppercase">14 Cayuga Way</span>
-                  </div>
-                  <div className="relative rounded-xl overflow-hidden">
-                    <Image src="/images/portfolio/14-cayuga-aerial-hq.jpg" alt="14 Cayuga Way aerial" fill className="object-cover" sizes="(max-width:768px) 50vw, 20vw" />
-                  </div>
-                  <div className="relative rounded-xl overflow-hidden">
-                    <Image src="/images/portfolio/14-cayuga-back-hq.jpg" alt="14 Cayuga Way back" fill className="object-cover" sizes="(max-width:768px) 50vw, 20vw" />
+            {/* Static 3D tilt — perspective applied once, never repaints */}
+            <div style={{ perspective: "1200px", perspectiveOrigin: "50% 30%" }}>
+              <div
+                className="rounded-[30px] border-4 border-[#6C6C6C] p-3 md:p-6 shadow-2xl"
+                style={{
+                  background: "#222222",
+                  transform: "rotateX(14deg)",
+                  transformOrigin: "50% 100%",
+                  boxShadow: "0 40px 80px rgba(0,0,0,0.55), 0 16px 32px rgba(0,0,0,0.35)",
+                  willChange: "auto",
+                }}
+              >
+                <div className="rounded-2xl overflow-hidden bg-zinc-900" style={{ height: "clamp(280px, 40vw, 560px)" }}>
+                  <div className="h-full w-full grid grid-cols-3 grid-rows-2 gap-2 p-1">
+                    <div className="relative col-span-2 row-span-2 rounded-xl overflow-hidden">
+                      <Image src="/images/portfolio/14-cayuga-front-hq.jpg" alt="14 Cayuga Way front" fill className="object-cover" sizes="(max-width:768px) 100vw, 60vw" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                      <span className="absolute bottom-3 left-3 text-xs text-white/80 font-bold tracking-widest uppercase">14 Cayuga Way</span>
+                    </div>
+                    <div className="relative rounded-xl overflow-hidden">
+                      <Image src="/images/portfolio/14-cayuga-aerial-hq.jpg" alt="14 Cayuga Way aerial" fill className="object-cover" sizes="(max-width:768px) 50vw, 20vw" />
+                    </div>
+                    <div className="relative rounded-xl overflow-hidden">
+                      <Image src="/images/portfolio/14-cayuga-back-hq.jpg" alt="14 Cayuga Way back" fill className="object-cover" sizes="(max-width:768px) 50vw, 20vw" />
+                    </div>
                   </div>
                 </div>
               </div>
