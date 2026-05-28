@@ -48,7 +48,7 @@ export default function Navbar() {
         {/* ── Logo ── */}
         <Link href="/" className="flex items-center mt-3 transition-opacity hover:opacity-80">
           <Image
-            src="/submark.png"
+            src={darkTop ? "/submark-white.png" : "/submark.png"}
             alt="Captured Aerial"
             width={270}
             height={107}
