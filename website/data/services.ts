@@ -12,21 +12,21 @@ export const serviceTiers: ServiceTier[] = [
   {
     id: "essential",
     name: "Essential",
-    price: "From $199",
+    price: "From $129",
     tagline: "Perfect for single-property listings",
     features: [
       "Up to 1 hour flight time",
       "20 edited aerial photos",
+      "2–3 edited 4K videos",
       "Online gallery delivery",
       "48-hour turnaround",
-      "FAA Part 107 certified pilot",
     ],
     cta: "Book Now",
   },
   {
     id: "professional",
     name: "Professional",
-    price: "From $399",
+    price: "From $229",
     tagline: "Full coverage for real estate & events",
     features: [
       "Up to 3 hours flight time",
@@ -34,7 +34,6 @@ export const serviceTiers: ServiceTier[] = [
       "4K video highlights reel",
       "Same-day rush available",
       "Multiple angles & altitudes",
-      "FAA Part 107 certified pilot",
     ],
     cta: "Book Now",
     highlighted: true,

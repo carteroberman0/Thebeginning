@@ -40,6 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# large video files — host separately
-/public/videos/*.mp4
+# original large video files — compressed versions are committed instead
 /public/videos/*.mov

@@ -1,0 +1,11 @@
+# Plugin/skill directories — local tools, not part of the website
+agentmemory/
+huashu-design/
+skill/
+ui-ux-pro-max-skill/
+
+# macOS
+.DS_Store
+
+# data store (agent memory) — root level only
+/data/

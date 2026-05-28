@@ -41,15 +41,15 @@ export default function Home() {
         >
           <div className="h-full w-full grid grid-cols-3 grid-rows-2 gap-2 p-1">
             <div className="relative col-span-2 row-span-2 rounded-xl overflow-hidden">
-              <Image src="/images/portfolio/14-cayuga-front.jpg" alt="14 Cayuga Way front" fill className="object-cover" sizes="60vw" />
+              <Image src="/images/portfolio/14-cayuga-front-hq.jpg" alt="14 Cayuga Way front" fill className="object-cover" sizes="(max-width:768px) 100vw, 60vw" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               <span className="absolute bottom-3 left-3 text-xs text-white/80 font-bold tracking-widest uppercase">14 Cayuga Way</span>
             </div>
             <div className="relative rounded-xl overflow-hidden">
-              <Image src="/images/portfolio/14-cayuga-aerial.jpg" alt="14 Cayuga Way aerial" fill className="object-cover" sizes="20vw" />
+              <Image src="/images/portfolio/14-cayuga-aerial-hq.jpg" alt="14 Cayuga Way aerial" fill className="object-cover" sizes="(max-width:768px) 50vw, 20vw" />
             </div>
             <div className="relative rounded-xl overflow-hidden">
-              <Image src="/images/portfolio/14-cayuga-back.jpg" alt="14 Cayuga Way back" fill className="object-cover" sizes="20vw" />
+              <Image src="/images/portfolio/14-cayuga-back-hq.jpg" alt="14 Cayuga Way back" fill className="object-cover" sizes="(max-width:768px) 50vw, 20vw" />
             </div>
           </div>
         </ContainerScroll>
@@ -73,9 +73,9 @@ export default function Home() {
 
             <ScrollStagger className="grid grid-cols-1 md:grid-cols-3 gap-px mt-14 rounded-xl overflow-hidden" staggerDelay={0.12} delayStart={0.1}>
               {[
-                { label: "01", title: "Real Estate",    desc: "Make listings stand out with stunning aerial perspectives that drive buyer interest and faster sales." },
-                { label: "02", title: "Cinematic Video", desc: "4K video productions with professional editing — for properties, events, and commercial use." },
-                { label: "03", title: "Cinematic Film",  desc: "Fully edited 4K productions with professional color grading — for properties, events, and commercial use." },
+                { label: "01", title: "Real Estate",    desc: "Aerial photos that move listings. Every angle, every roofline, every yard — shot and edited within 48 hours." },
+                { label: "02", title: "Cinematic Video", desc: "4K walkthroughs and flyovers with full post-production. Property reveals, event coverage, commercial reels." },
+                { label: "03", title: "Cinematic Film",  desc: "Multi-session productions with color grading and cinematic storytelling — for high-value properties and brands." },
               ].map((s, i) => (
                 <StaggerItem key={s.title} animation="fadeUp">
                   <div
@@ -110,14 +110,11 @@ export default function Home() {
             <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(45,97,25,0.30) 0%, transparent 70%)" }} />
 
             <div className="relative z-10">
-              <p style={{ fontSize: 10, fontWeight: 800, letterSpacing: "0.35em", textTransform: "uppercase", color: "rgba(100,200,60,0.7)", marginBottom: 16 }}>
-                Ready to Fly?
-              </p>
               <h2 style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)", fontWeight: 900, textTransform: "uppercase", lineHeight: 1, color: "#ffffff", marginBottom: 16 }}>
                 Let&apos;s Elevate Your Next Listing
               </h2>
               <p className="mb-10 max-w-md mx-auto text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>
-                Tell us about your property and we&apos;ll get back to you within 48 hours.
+                Tell us your address and shoot date. We confirm availability same day.
               </p>
               <Link href="/contact" className="btn btn-green">Book a Shoot</Link>
             </div>

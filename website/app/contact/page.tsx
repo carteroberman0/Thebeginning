@@ -14,9 +14,8 @@ export default function ContactPage() {
     <div className="max-w-2xl mx-auto px-6 pt-28 pb-24">
       <ScrollReveal animation="fadeLeft" duration={0.7}>
         <SectionHead
-          eyebrow="Get in Touch"
           title="Book a Shoot"
-          lede="Fill out the form and we'll get back to you within 48 hours to confirm details and availability."
+          lede="Tell us your property, preferred date, and what you need. We confirm within 24 hours."
         />
       </ScrollReveal>
 
