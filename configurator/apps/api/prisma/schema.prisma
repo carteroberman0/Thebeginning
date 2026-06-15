@@ -1,0 +1,135 @@
+// Exterior configurator data model.
+// Phase 1: Property, OptionCatalog, RenderJob, RenderAsset, Configuration.
+// Phase 2 (scaffolded, not wired): User, Contractor, Lead.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// A property the operator has uploaded a base image for.
+model Property {
+  id           String   @id @default(cuid())
+  name         String
+  address      String?
+  baseImageUrl String? // the source drone/exterior image (or a generated placeholder)
+  status       String   @default("draft") // draft | rendering | ready
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  renderJobs     RenderJob[]
+  renderAssets   RenderAsset[]
+  configurations Configuration[]
+}
+
+/// The catalog of selectable options across all properties.
+/// Each row is one value on one axis, e.g. (siding, "cedar-board", "Cedar Board").
+model OptionCatalog {
+  id        String   @id @default(cuid())
+  category  String // see OPTION_CATEGORIES in @configurator/shared
+  value     String // machine value, e.g. "cedar-board"
+  label     String // display label, e.g. "Cedar Board"
+  swatchHex String? // color chip shown in the configurator panel
+  sortOrder Int      @default(0)
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  renderJobs   RenderJob[]
+  renderAssets RenderAsset[]
+
+  @@unique([category, value])
+}
+
+/// One render task: "generate the layer for this property + this option".
+/// Processed asynchronously; the web app polls its status.
+model RenderJob {
+  id         String   @id @default(cuid())
+  propertyId String
+  optionId   String
+  status     String   @default("queued") // queued | processing | done | failed
+  error      String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  property Property      @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  option   OptionCatalog @relation(fields: [optionId], references: [id], onDelete: Cascade)
+
+  @@unique([propertyId, optionId])
+}
+
+/// The stored, finished render layer for one (property, option) pair.
+/// The configurator composites these client-side to feel instant.
+model RenderAsset {
+  id         String   @id @default(cuid())
+  propertyId String
+  optionId   String
+  imageUrl   String
+  createdAt  DateTime @default(now())
+
+  property Property      @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  option   OptionCatalog @relation(fields: [optionId], references: [id], onDelete: Cascade)
+
+  @@unique([propertyId, optionId])
+}
+
+/// The scoped job: a buyer's complete selection for a property.
+/// This high-intent record is the asset that becomes a contractor lead.
+model Configuration {
+  id         String   @id @default(cuid())
+  propertyId String
+  selections Json // { siding: "cedar-board", siding_color: "hale-navy", ... }
+  buyerName  String?
+  buyerEmail String?
+  buyerPhone String?
+  status     String   @default("saved") // saved | routed
+  createdAt  DateTime @default(now())
+
+  property Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  lead     Lead?
+}
+
+// ---------------------------------------------------------------------------
+// Phase 2 scaffolding — tables exist so lead routing drops in later.
+// Not exercised by the Phase 1 API/UI.
+// ---------------------------------------------------------------------------
+
+/// Simple account model with roles. Auth flow is not built yet.
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  role      String   @default("operator") // operator | contractor | buyer
+  name      String?
+  createdAt DateTime @default(now())
+
+  contractor Contractor?
+}
+
+/// A local contractor who can receive pre-visualized leads.
+model Contractor {
+  id          String   @id @default(cuid())
+  userId      String?  @unique
+  name        String
+  email       String   @unique
+  trade       String   @default("exterior")
+  serviceArea String? // town / zip the contractor covers
+  createdAt   DateTime @default(now())
+
+  user  User?  @relation(fields: [userId], references: [id])
+  leads Lead[]
+}
+
+/// A saved configuration routed (or queued to route) to a contractor.
+model Lead {
+  id              String   @id @default(cuid())
+  configurationId String   @unique
+  contractorId    String?
+  status          String   @default("new") // new | sent | accepted | declined
+  createdAt       DateTime @default(now())
+
+  configuration Configuration @relation(fields: [configurationId], references: [id], onDelete: Cascade)
+  contractor    Contractor?   @relation(fields: [contractorId], references: [id])
+}

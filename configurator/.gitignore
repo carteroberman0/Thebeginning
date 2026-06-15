@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+*.log
+
+# Local generated render/storage files
+apps/api/uploads/
+apps/api/src/generated/
+
+# Prisma
+apps/api/prisma/*.db
