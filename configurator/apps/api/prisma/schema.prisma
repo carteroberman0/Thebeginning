@@ -108,6 +108,20 @@ model User {
   contractor Contractor?
 }
 
+/// Inbound interest from the marketing site: a homeowner wanting a render /
+/// quote, or a local pro wanting to join the network. Lightweight on purpose —
+/// it captures intent before a full Configuration/Lead exists.
+model Inquiry {
+  id        String   @id @default(cuid())
+  email     String
+  name      String?
+  postcode  String?
+  intent    String   @default("render") // render | quote | pro-signup
+  trade     String? // for pro signups: shutters | builder | roofer | landscaper | painter | solar
+  message   String?
+  createdAt DateTime @default(now())
+}
+
 /// A local contractor who can receive pre-visualized leads.
 model Contractor {
   id          String   @id @default(cuid())

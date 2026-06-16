@@ -5,6 +5,8 @@ import { env } from "./env.js";
 import { renderQueue } from "./jobs/queue.js";
 import { configurationsRouter } from "./routes/configurations.js";
 import { configureRouter } from "./routes/configure.js";
+import { contractorsRouter } from "./routes/contractors.js";
+import { inquiriesRouter } from "./routes/inquiries.js";
 import { optionsRouter } from "./routes/options.js";
 import { propertiesRouter } from "./routes/properties.js";
 
@@ -20,6 +22,8 @@ app.use("/api/options", optionsRouter);
 app.use("/api/properties", propertiesRouter);
 app.use("/api/configure", configureRouter);
 app.use("/api/configurations", configurationsRouter);
+app.use("/api/contractors", contractorsRouter);
+app.use("/api/inquiries", inquiriesRouter);
 
 // Pick up any jobs left unfinished from a previous run, then start serving.
 renderQueue.resume().catch((err) => console.error("Failed to resume render queue:", err));

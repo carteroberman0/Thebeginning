@@ -7,6 +7,9 @@
     "packages/*",
     "apps/*"
   ],
+  "overrides": {
+    "@types/three": "0.184.1"
+  },
   "scripts": {
     "dev": "npm run dev --workspace apps/api & npm run dev --workspace apps/web",
     "dev:api": "npm run dev --workspace apps/api",

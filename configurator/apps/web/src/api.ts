@@ -61,4 +61,20 @@ export const api = {
       method: "POST",
       body: JSON.stringify(payload),
     }),
+
+  createInquiry: (payload: {
+    email: string;
+    name?: string;
+    postcode?: string;
+    intent?: "render" | "quote" | "pro-signup";
+    trade?: string;
+    message?: string;
+  }) =>
+    http<{ id: string; intent: string }>("/api/inquiries", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+
+  listContractorCategories: () =>
+    http<Array<{ trade: string; count: number }>>("/api/contractors/categories"),
 };
